@@ -9,7 +9,9 @@ import { ChartData  } from 'chart.js';
 export class DonaComponent {
 
   @Input() titulo :string =  "Sin titulo";
+
   @Input() labels : string[] = ['No label', 'No label', 'No label']
+  
   @Input() data : ChartData<'doughnut'> = {    
     labels: this.labels,
     datasets: [
