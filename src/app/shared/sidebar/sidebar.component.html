@@ -12,23 +12,23 @@
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
-            ><img src="../../../assets/images/users/profile.png" alt="user" /><span
+            ><img [src]="usuario.imagenUrl" alt="user" /><span
               class="hide-menu"
-              >Steave Jobs
+              >{{usuario.nombre}}
             </span></a
           >
           <ul aria-expanded="false" class="collapse">
-            <li><a href="javascript:void()">My Profile </a></li>
+            <li><a routerLinkActive="active" routerLink="./perfil">My Profile </a></li>
             <li><a href="javascript:void()">My Balance</a></li>
             <li><a href="javascript:void()">Inbox</a></li>
-            <li><a routerLink="/dashboard/account-settings">Account Setting</a></li>
-            <li><a routerLink="/login">Logout</a></li>
+            <li><a routerLinkActive="active" routerLink="./account-settings">Account Setting</a></li>
+            <li><a routerLinkActive="active" routerLink="/login">Logout</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
 
-        <li *ngFor="let item of _sideBarService.menu">
+        <li *ngFor="let item of sideBarService.menu">
           <a
             class="has-arrow waves-effect waves-dark"
             href="#"

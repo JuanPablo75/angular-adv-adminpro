@@ -27,7 +27,6 @@ export class LoginComponent {
                   });
                 }
   login(){
-
     this.usuarioService.login(this.loginForm.value)
         .subscribe( 
           {

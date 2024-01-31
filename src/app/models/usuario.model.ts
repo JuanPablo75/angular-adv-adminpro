@@ -1,3 +1,6 @@
+import { environment } from "src/environments/environment";
+
+const api_url = environment.base_url;
 
 export class Usuario{
 
@@ -10,6 +13,15 @@ export class Usuario{
         public uid?: string,
         public role?: string
     ){}
+
+    get imagenUrl(){
+        // /upload/usuarios/no-image
+        if ( this.img ){
+            return `${ api_url}/upload/usuarios/${this.img}`
+        } else{
+        return `${ api_url}/upload/usuarios/no-image`
+        }
+    }
 }
 
 
