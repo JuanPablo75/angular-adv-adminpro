@@ -9,7 +9,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: []
 })
 export class PerfilComponent {
 
@@ -77,7 +77,7 @@ export class PerfilComponent {
     .catch( err => {
       Swal.fire( 'Error', 'No se pudo subir la imagen', 'error')
 
-      console.log(err);
+      // console.log(err);
     })
   }
  
