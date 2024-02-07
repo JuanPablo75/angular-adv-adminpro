@@ -1,3 +1,4 @@
+// Angular Core y Librerías Externas
 import { Component } from '@angular/core';
 import { ChartData } from 'chart.js';
 
@@ -8,7 +9,8 @@ import { ChartData } from 'chart.js';
 })
 export class Grafica1Component {
 
-  public labels1 : string [] = ['Jamon', 'Chorizo', 'Lomo'];
+  // Datos para la primera gráfica de donut
+  public labels1: string[] = ['Jamon', 'Chorizo', 'Lomo'];
 
   public data1: ChartData<'doughnut'> = {
     labels: this.labels1,
@@ -20,7 +22,8 @@ export class Grafica1Component {
     ],
   };
 
-  public labels2 : string [] = ['Cerveza', 'Cocacola', 'Vino'];
+  // Datos para la segunda gráfica de donut
+  public labels2: string[] = ['Cerveza', 'Cocacola', 'Vino'];
 
   public data2: ChartData<'doughnut'> = {
     labels: this.labels2,
@@ -32,7 +35,8 @@ export class Grafica1Component {
     ],
   };
 
-  public labels3 : string [] = ['Jamon', 'Chorizo', 'Lomo'];
+  // Datos para la tercera gráfica de donut
+  public labels3: string[] = ['Jamon', 'Chorizo', 'Lomo'];
 
   public data3: ChartData<'doughnut'> = {
     labels: this.labels3,
@@ -44,7 +48,8 @@ export class Grafica1Component {
     ],
   };
 
-  public labels4 : string [] = ['Coches', 'Furgonetas', 'Motos'];
+  // Datos para la cuarta gráfica de donut
+  public labels4: string[] = ['Coches', 'Furgonetas', 'Motos'];
 
   public data4: ChartData<'doughnut'> = {
     labels: this.labels4,
@@ -55,7 +60,5 @@ export class Grafica1Component {
       },
     ],
   };
-
-
 
 }

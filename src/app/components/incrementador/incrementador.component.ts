@@ -1,3 +1,4 @@
+// Angular Core y Librerías Externas
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 @Component({
@@ -5,51 +6,59 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
   templateUrl: './incrementador.component.html',
   styleUrls: []
 })
-export class IncrementadorComponent implements OnInit{
+export class IncrementadorComponent implements OnInit {
 
-  ngOnInit() {
-    this.btnClass = `btn ${this.btnClass}`
-  }
-
-  // @Input('valor') progreso: number = 40;
+  // Valor inicial del progreso
   @Input() progreso: number = 40;
+
+  // Clase CSS para el botón, por defecto es 'btn-primary'
   @Input() btnClass: string = 'btn-primary';
 
+  // Evento de salida para notificar cambios en el valor del progreso
   @Output() valorSalida: EventEmitter<number> = new EventEmitter();
 
-  get getPorcentaje(){
+  // Método de inicialización del componente
+  ngOnInit() {
+    // Añade la clase CSS al botón
+    this.btnClass = `btn ${this.btnClass}`;
+  }
+
+  // Propiedad computada para obtener el porcentaje formateado
+  get getPorcentaje() {
     return `${this.progreso}%`;
   }
 
-  cambiarValor(valor:number){
-
-    if(this.progreso >=100 && valor >=0){
+  // Método para cambiar el valor del progreso
+  cambiarValor(valor: number) {
+    // Manejo de casos límite para el progreso
+    if (this.progreso >= 100 && valor >= 0) {
       this.valorSalida.emit(100);
       return this.progreso = 100;
     }
 
-    if(this.progreso <=0 && valor <=0){
-      this.valorSalida.emit(0)
+    if (this.progreso <= 0 && valor <= 0) {
+      this.valorSalida.emit(0);
       return this.progreso = 0;
     }
-    
-     this.progreso = this.progreso += valor;
-     this.valorSalida.emit(this.progreso);
-     return this.progreso;
+
+    // Actualiza el progreso y emite el evento de salida
+    this.progreso = this.progreso + valor;
+    this.valorSalida.emit(this.progreso);
+    return this.progreso;
   }
 
-  onChange( nuevoValor: number ){
-
-    if(nuevoValor >= 100){
+  // Método llamado cuando cambia el valor desde el componente externo
+  onChange(nuevoValor: number) {
+    // Ajusta el valor del progreso según los límites
+    if (nuevoValor >= 100) {
       this.progreso = 100;
-    }else if(nuevoValor <= 0){
+    } else if (nuevoValor <= 0) {
       this.progreso = 0;
-    }else{
+    } else {
       this.progreso = nuevoValor;
     }
 
+    // Emite el evento de salida con el nuevo valor del progreso
     this.valorSalida.emit(this.progreso);
-
-    // this.valorSalida.emit(valor);
   }
 }
