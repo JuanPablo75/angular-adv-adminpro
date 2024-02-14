@@ -45,8 +45,8 @@ export class LoginComponent {
             localStorage.removeItem('email');
           }
           // Redirección a la página principal tras el inicio de sesión exitoso
-          console.log('Usuario logeado.');
-          console.log(resp);
+          // console.log('Usuario logeado.');
+          // console.log(resp);
           this.router.navigateByUrl('/');
         },
         error: (err) => {

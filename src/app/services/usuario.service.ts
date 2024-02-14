@@ -56,17 +56,32 @@ export class UsuarioService {
     }
   }
 
+  // Obtiene el ROLE del usuario 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
+  guardarLocalStorage( token: string, menu: any ){
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+
+  }
+
   /**
    * Valida la vigencia del token de autenticación.
    * @returns Observable que emite un booleano indicando si el token es válido.
    */
   validarToken(): Observable<boolean> {
-    return this.http.get(`${base_url}/login/renew`, this.headers).pipe(
-      map((resp: any) => {
-        const { email, google, nombre, role, img, uid } = resp.usuario;
-        this.usuario = new Usuario(nombre, email, '', google, img, uid, role);
-        localStorage.setItem('token', resp.token);
-        return true;
+
+    return this.http.get(`${base_url}/login/renew`, this.headers)
+          .pipe(
+            map((resp: any) => {
+              const { email, google, nombre, role, img, uid } = resp.usuario;
+              this.usuario = new Usuario(nombre, email, '', google, img, uid, role);
+              this.guardarLocalStorage( resp.token, resp.menu );
+
+              return true;
       }),
       catchError(error => of(false))
     );
@@ -80,7 +95,7 @@ export class UsuarioService {
   crearUsuario(formData: RegisterForm) {
     return this.http.post(`${base_url}/usuarios`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage( resp.token, resp.menu );
       })
     );
   }
@@ -107,13 +122,15 @@ export class UsuarioService {
   login(formData: LoginForm) {
     return this.http.post(`${base_url}/login`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorage( resp.token, resp.menu );
       })
     );
   }
 
   /** Cierra la sesión del usuario y redirige a la página de inicio de sesión. */
   logout() {
+
+    localStorage.removeItem('menu');
     localStorage.removeItem('token');
     this.router.navigateByUrl('/login');
   }
