@@ -1,9 +1,18 @@
 // Angular Core y Librerías Externas
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, Router, CanMatchFn } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 import { inject } from '@angular/core';
 import { tap } from 'rxjs';
 
+export const canMatch: CanMatchFn = () => {
+  const router = inject(Router);
+  return inject(UsuarioService).validarToken()
+    .pipe(
+      tap( isAuthenticated => {
+        if ( !isAuthenticated ) router.navigateByUrl('/login');
+      })
+    )
+}
 // Definición de la función de canActivate
 export const authGuard: CanActivateFn = (route, state) => {
 

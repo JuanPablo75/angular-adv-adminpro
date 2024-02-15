@@ -2,5 +2,5 @@
 
 export const environment = {
     pdoruction: false,
-    base_url:  'http://localhost:3000/api',
+    base_url:  'https://adminpro-backend-i81q.onrender.com/api',
 }
